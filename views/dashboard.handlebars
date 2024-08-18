@@ -1,0 +1,18 @@
+{{> header}}
+
+<main>
+    <section>
+        <h2>Your Posts</h2>
+        {{#each posts}}
+            <article>
+                <h2>{{title}}</h2>
+                <p>{{createdAt}}</p>
+                <a href="/dashboard/edit/{{id}}">Edit</a>
+                <button data-id="{{id}}" class="delete-post">Delete</button>
+            </article>
+        {{/each}}
+        <button id="new-post">New Post</button>
+    </section>
+</main>
+
+{{> footer}}
