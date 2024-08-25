@@ -56,4 +56,26 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// Login route
+router.get('/login', (req, res) => {
+    // If the user is already logged in, redirect to the homepage
+    if (req.session.logged_in) {
+      res.redirect('/');
+      return;
+    }
+  
+    res.render('login');
+  });
+
+  // Signup route
+router.get('/signup', (req, res) => {
+    if (req.session.logged_in) {
+      res.redirect('/');
+      return;
+    }
+  
+    res.render('signup');
+  });
+  
+
 module.exports = router;

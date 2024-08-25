@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+require('dotenv').config(); // Ensure you load environment variables from .env
 
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
@@ -14,12 +15,12 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-  secret: 'Super secret secret',
+  secret: process.env.SECRET_KEY,  // Use the SECRET_KEY from the .env file
   cookie: {
-    maxAge: 300000,
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
+    maxAge: 300000,  // Session expires after 5 minutes of inactivity
+    httpOnly: true,  // Prevents client-side JavaScript from reading the cookie
+    secure: false,   // Ensures the browser only sends the cookie over HTTPS
+    sameSite: 'strict', // Ensures the cookie is not sent with cross-site requests
   },
   resave: false,
   saveUninitialized: true,
