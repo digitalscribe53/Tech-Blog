@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Post } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Dashboard route
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -13,16 +12,18 @@ router.get('/', withAuth, async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
+    // Update last activity time
+    req.session.lastActivity = new Date();
+
     res.render('dashboard', {
       posts,
-      logged_in: req.session.logged_in,
+      logged_in: true
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Edit a post
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
@@ -34,9 +35,12 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
     const post = postData.get({ plain: true });
 
+    // Update last activity time
+    req.session.lastActivity = new Date();
+
     res.render('edit-post', { 
       post, 
-      logged_in: req.session.logged_in 
+      logged_in: true 
     });
   } catch (err) {
     res.status(500).json(err);

@@ -19,7 +19,7 @@ const sess = {
   cookie: {
     maxAge: 300000,  // Session expires after 5 minutes of inactivity
     httpOnly: true,  // Prevents client-side JavaScript from reading the cookie
-    secure: false,   // Ensures the browser only sends the cookie over HTTPS
+    secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
     sameSite: 'strict', // Ensures the cookie is not sent with cross-site requests
   },
   resave: false,
@@ -30,6 +30,14 @@ const sess = {
 };
 
 app.use(session(sess));
+
+// Middleware to update last activity time for logged-in users
+app.use((req, res, next) => {
+  if (req.session.logged_in) {
+    req.session.lastActivity = new Date();
+  }
+  next();
+});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

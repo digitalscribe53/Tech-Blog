@@ -17,10 +17,11 @@ const loginFormHandler = async (event) => {
         document.location.replace('/dashboard');
       } else {
         const result = await response.json();
-        throw new Error(result.message);
+        errorMessageElement.textContent = result.message || 'Failed to log in. Please try again.';
+        errorMessageElement.style.display = 'block';
       }
     } catch (error) {
-      errorMessageElement.textContent = error.message || 'Failed to log in. Please try again.';
+      errorMessageElement.textContent = 'An error occurred. Please try again later.';
       errorMessageElement.style.display = 'block';
     }
   } else {

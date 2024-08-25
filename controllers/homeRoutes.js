@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { Post, Comment, User } = require('../models');
+const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
-// Home route
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -15,16 +15,20 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('home', {
-      posts,
-      logged_in: req.session.logged_in,
+    // Update last activity time
+    if (req.session.logged_in) {
+      req.session.lastActivity = new Date();
+    }
+
+    res.render('home', { 
+      posts, 
+      logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Single post route
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -35,47 +39,43 @@ router.get('/post/:id', async (req, res) => {
         },
         {
           model: Comment,
-          include: [
-            {
-              model: User,
-              attributes: ['username'],
-            },
-          ],
+          include: [User],
         },
       ],
     });
 
     const post = postData.get({ plain: true });
 
+    // Update last activity time
+    if (req.session.logged_in) {
+      req.session.lastActivity = new Date();
+    }
+
     res.render('post', {
       ...post,
-      logged_in: req.session.logged_in,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Login route
 router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect to the homepage
-    if (req.session.logged_in) {
-      res.redirect('/');
-      return;
-    }
-  
-    res.render('login');
-  });
+  if (req.session.logged_in) {
+    res.redirect('/dashboard');
+    return;
+  }
 
-  // Signup route
+  res.render('login');
+});
+
 router.get('/signup', (req, res) => {
-    if (req.session.logged_in) {
-      res.redirect('/');
-      return;
-    }
-  
-    res.render('signup');
-  });
-  
+  if (req.session.logged_in) {
+    res.redirect('/dashboard');
+    return;
+  }
+
+  res.render('signup');
+});
 
 module.exports = router;

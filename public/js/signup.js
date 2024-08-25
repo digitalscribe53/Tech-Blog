@@ -17,12 +17,17 @@ const signupFormHandler = async (event) => {
         document.location.replace('/dashboard');
       } else {
         const result = await response.json();
-        throw new Error(result.message);
+        if (result.errors) {
+          const errorMessages = result.errors.map(error => error.message);
+          errorMessageElement.textContent = errorMessages.join('. ');
+        } else {
+          errorMessageElement.textContent = 'Failed to sign up. Please try again.';
+        }
       }
     } catch (error) {
-      errorMessageElement.textContent = error.message || 'Failed to sign up. Please try again.';
-      errorMessageElement.style.display = 'block';
+      errorMessageElement.textContent = 'An error occurred. Please try again later.';
     }
+    errorMessageElement.style.display = 'block';
   } else {
     errorMessageElement.textContent = 'Please enter both a username and password.';
     errorMessageElement.style.display = 'block';
