@@ -1,30 +1,31 @@
-{{> header}}
-
 <main>
-    <article>
-        <h2>{{title}}</h2>
-        <p>Posted by {{user.username}} on {{createdAt}}</p>
-        <p>{{content}}</p>
+    <article class="post">
+        <h2 class="post-title">{{title}}</h2>
+        <div class="post-meta">
+            <span>Posted by {{user.username}} on {{format_date createdAt}}</span>
+        </div>
+        <div class="post-content">
+            <p>{{content}}</p>
+        </div>
     </article>
 
-    <section>
-        <h3>Comments</h3>
+    <section class="post">
+        <h3 class="post-title">Comments</h3>
         {{#if logged_in}}
-            <!-- Display the comment form if the user is logged in -->
             <form id="comment-form">
                 <textarea id="comment-content" name="content" placeholder="Leave a comment..." required></textarea>
-                <button type="submit">Submit Comment</button>
+                <button type="submit" class="nav-button">Submit Comment</button>
             </form>
         {{else}}
-            <!-- Display the login prompt if the user is not logged in -->
             <p><a href="/login">Sign in to comment</a></p>
         {{/if}}
 
-        <!-- Display the existing comments -->
         {{#each comments}}
             <div class="comment">
                 <p>{{content}}</p>
-                <p><strong>By {{user.username}} on {{createdAt}}</strong></p>
+                <div class="post-meta">
+                    <span>By {{user.username}} on {{format_date createdAt}}</span>
+                </div>
             </div>
         {{/each}}
     </section>

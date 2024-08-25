@@ -1,27 +1,31 @@
-{{> header}}
-
 <main>
     <section>
-        <h2>Your Dashboard</h2>
+        <h2 class="post-title">Your Dashboard</h2>
         {{#if posts.length}}
             {{#each posts}}
-                <article>
-                    <h3>{{title}}</h3>
-                    <p>{{createdAt}}</p>
-                    <p>{{content}}</p>
-                    <a href="/dashboard/edit/{{id}}">Edit</a>
+                <article class="post">
+                    <h3 class="post-title">{{title}}</h3>
+                    <div class="post-meta">
+                        <span>Posted on {{format_date createdAt}}</span>
+                    </div>
+                    <div class="post-content">
+                        <p>{{content}}</p>
+                    </div>
+                    <a href="/dashboard/edit/{{id}}" class="nav-button">Edit</a>
                 </article>
             {{/each}}
         {{else}}
             <p>No posts yet. Create a new post to get started!</p>
         {{/if}}
-        <button id="new-post">New Post</button>
+
+        <button id="new-post" class="nav-button">New Post</button>
 
         <!-- New Post Form -->
-        <form id="new-post-form" style="display: none;">
+        <form id="new-post-form" style="display: none;" class="post">
+            <h3 class="post-title">Create New Post</h3>
             <input type="text" id="post-title" name="title" placeholder="Post Title" required>
             <textarea id="post-content" name="content" placeholder="Post Content" required></textarea>
-            <button type="submit">Submit Post</button>
+            <button type="submit" class="nav-button">Submit Post</button>
         </form>
     </section>
 </main>

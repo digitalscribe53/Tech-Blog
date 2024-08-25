@@ -1,6 +1,6 @@
 <div class="edit-post-container">
-  <h2>Edit Post</h2>
-  <form class="edit-post-form">
+  <form class="edit-post-form post">
+    <h2 class="post-title">Edit Post</h2>
     <input type="hidden" id="post-id" value="{{post.id}}">
     <div>
       <label for="post-title">Title:</label>
@@ -10,7 +10,7 @@
       <label for="post-content">Content:</label>
       <textarea id="post-content" name="content" required>{{post.content}}</textarea>
     </div>
-    <button type="submit">Update Post</button>
+    <button type="submit" class="nav-button">Update Post</button>
   </form>
 </div>
 

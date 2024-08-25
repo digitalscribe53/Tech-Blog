@@ -1,13 +1,15 @@
-{{> header}}
-
 <main>
     <section>
         {{#each posts}}
-            <article>
-                <h2>{{title}}</h2>
-                <p>{{createdAt}}</p>
-                <p>{{content}}</p>
-                <a href="/post/{{id}}">Read More</a>
+            <article class="post">
+                <h2 class="post-title">{{title}}</h2>
+                <div class="post-meta">
+                    <span>Posted on {{format_date createdAt}}</span>
+                </div>
+                <div class="post-content">
+                    <p>{{content}}</p>
+                </div>
+                <a href="/post/{{id}}" class="nav-button">Read More</a>
             </article>
         {{/each}}
     </section>

@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    {{{body}}}
+    <header>
+        <h1 class= "animate__animated animate__bounce">Tech Blog</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+            {{#if logged_in}}
+                <a href="/dashboard" class="nav-button">Dashboard</a>
+                <button id="logout" class="nav-button">Logout</button>
+            {{else}}
+                <a href="/login" class="nav-button">Login</a>
+                <a href="/signup" class="nav-button">Sign Up</a>
+            {{/if}}
+        </nav>
+    </header>
 
-    <!-- Include the dashboard.js script -->
+    <main>
+        {{{body}}}
+    </main>
     <script src="/js/signup.js"></script>
+    {{#if logged_in}}
     <script src="/js/dashboard.js"></script>
     <script src="/js/logout.js"></script>
-    
+
+    {{/if}}
 </body>
-</html>
+</html>    
+  

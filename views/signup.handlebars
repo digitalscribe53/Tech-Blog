@@ -1,18 +1,13 @@
-{{> header}}
-
 <main>
   <section>
-    <h2>Sign Up</h2>
-    <form id="signup-form">
+    <form id="signup-form" class="post">
+      <h2 class="post-title">Sign Up</h2>
       <input type="text" id="username-signup" name="username" placeholder="Username" required>
       <input type="password" id="password-signup" name="password" placeholder="Password" required>
-      <button type="submit">Sign Up</button>
+      <button type="submit" class="nav-button">Sign Up</button>
+      <p id="signup-error-message" style="display:none;"></p>
+      <a href="/login">Already have an account? Login here.</a>
     </form>
-
-    <!-- Error message element -->
-    <p id="signup-error-message" style="display:none;"></p>
-
-    <a href="/login">Already have an account? Login here.</a>
   </section>
 </main>
 
