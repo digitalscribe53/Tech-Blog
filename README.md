@@ -13,5 +13,6 @@ The finished app will be deployed at a live URL which can be viewed in a browser
 ![Screenshot](assets/Tech-Blog-scrnsht.JPG)
 
 ## Link to Live URL
+[Click to visit site](https://tech-blog-95af.onrender.com/)
 
 
