@@ -16,7 +16,6 @@ if (databaseUrl) {
     console.log('Parsing Database URL...');
     sequelize = new Sequelize(databaseUrl, {
       dialect: 'postgres',
-      protocol: 'postgres',
       dialectOptions: {
         ssl: {
           require: true,
