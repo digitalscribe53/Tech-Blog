@@ -6,7 +6,7 @@ The Tech-Blog is a fully functional Blogging site including user signup and auth
 
 ## Usage 
 
-The finished app will be deployed at a live URL which can be viewed in a browser. 
+The app is deployed at render.com and can be viewed at the url below. Please wait ~ 1 minute for Render to spin up the service and load the page. Users can then create an account and use all the features of the blog. 
 
 ## Screenshot
 
@@ -14,4 +14,4 @@ The finished app will be deployed at a live URL which can be viewed in a browser
 
 ## Link to Live URL
 
-
+[Click](https://tech-blog-95af.onrender.com/)
